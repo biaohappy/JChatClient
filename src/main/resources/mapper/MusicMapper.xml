@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaobiao.chatclient.mapper.MusicMapper">
+    <resultMap id="BaseResultMap" type="com.xiaobiao.chatclient.model.Music">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="musicName" property="musicName" jdbcType="VARCHAR"/>
+        <result column="userCode" property="userCode" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="delteFlag" property="deleteFlag" jdbcType="CHAR"/>
+        <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Select_List_Where">
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="musicName != null">
+                and musicName =#{musicName,jdbcType=VARCHAR}
+            </if>
+            <if test="url != null">
+                and url =#{url,jdbcType=VARCHAR}
+            </if>
+            <if test="userCode != null">
+                and userCode = #{userCode,jdbcType=VARCHAR}
+            </if>
+            <if test="deleteFlag != null">
+                and deleteFlag = #{deleteFlag,jdbcType=CHAR}
+            </if>
+            <if test="createTime != null">
+                and createTime = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+        id, musicName,url,userCode,deleteFlag,createTime
+    </sql>
+    <select id="queryMusic" resultMap="BaseResultMap" resultType="com.xiaobiao.chatclient.model.Music">
+        select
+        <include refid="Base_Column_List"/>
+        from music
+        <include refid="Select_List_Where"/>
+    </select>
+
+    <insert id="insertMusic" parameterType="com.xiaobiao.chatclient.model.Music" >
+        insert into music
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null">
+                id,
+            </if>
+            <if test="musicName != null">
+                musicName,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="userCode != null">
+                userCode,
+            </if>
+            <if test="deleteFlag != null">
+                deleteFlag,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="musicName != null">
+                #{musicName,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="userCode != null">
+                #{userCode,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=CHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+</mapper>
