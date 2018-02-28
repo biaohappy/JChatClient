@@ -41,7 +41,7 @@ function toplay(title, url) {
         {
             title: "霍比特人3五军之战",
             artist: "小彪",
-            mp3: "/static/uploadFileDir/Two Steps From Hell - Victory.mp3",
+            mp3: "/resources/uploadFileDir/Two Steps From Hell - Victory.mp3",
             poster: "/resources/manager/images/m0.jpg"
         }
         // {
